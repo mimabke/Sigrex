@@ -10,7 +10,7 @@ const Formation = () => {
   const navigate = useNavigate();
   const [formation, setFormation] = useState(null);
   const fetchFormation = () => {
-    Axios.get(`http://localhost:3001/formation/${id}`)
+    Axios.get(`http://localhost:5000/formations/${id}`)
       .then((response) => {
         setFormation(response.data);
         console.log(response.data);
@@ -29,7 +29,7 @@ const Formation = () => {
       <div className="flex">
         <SideBar />
         <div className="flex flex-col w-full mx-8 my-2 ">
-          {formation && (
+          {formation ? (
             <FormationDétails
               formationId={formation.formationId}
               offreId={formation.offreId}
@@ -61,7 +61,11 @@ const Formation = () => {
               niveau={formation.niveau}
               tarif_participant={formation.tarif_participant}
             />
-          )}
+          ) : (
+            <p>
+            failed to load
+            </p>)
+          }
         </div>
       </div>
     </div>
